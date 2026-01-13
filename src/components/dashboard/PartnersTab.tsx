@@ -1,16 +1,47 @@
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { capitalize } from "@/lib/utils";
+import { useState } from "react";
 
 const PartnerTabs = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+  const tabs = ["overview", "database", "rebate", "contracts", "retailers"];
+
   return (
-    <Tabs defaultValue="overview" className="w-full gap-0 pt-1">
-      <TabsList className="h-auto bg-transparent p-0">
-        {["overview", "database", "rebate", "contracts", "retailers"].map(
-          (tab) => (
-            <TabsTrigger
-              key={tab}
-              value={tab}
-              className="
+    <Tabs
+      value={activeTab}
+      onValueChange={setActiveTab}
+      className="w-full gap-0 pt-1 px-4 md:px-0"
+    >
+      {/* Mobile Select */}
+      <div className="md:hidden py-2">
+        <Select value={activeTab} onValueChange={setActiveTab}>
+          <SelectTrigger className="w-full rounded-xl bg-gray-50 border-gray-100 text-sm font-medium">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {tabs.map((tab) => (
+              <SelectItem key={tab} value={tab} className="text-sm">
+                {tab === "rebate" ? "Rebate Journey" : capitalize(tab)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Desktop Tabs */}
+      <TabsList className="hidden md:flex h-auto bg-transparent p-0 overflow-x-auto scrollbar-hide justify-start">
+        {tabs.map((tab) => (
+          <TabsTrigger
+            key={tab}
+            value={tab}
+            className="
               relative rounded-none mr-6
               text-sm font-medium text-gray-500
               data-[state=active]:shadow-none
@@ -23,12 +54,12 @@ const PartnerTabs = () => {
               data-[state=active]:after:w-full
               data-[state=active]:after:bg-black
               hover:text-black
+              flex-none
             "
-            >
-              {tab === "rebate" ? "Rebate Journey" : capitalize(tab)}
-            </TabsTrigger>
-          )
-        )}
+          >
+            {tab === "rebate" ? "Rebate Journey" : capitalize(tab)}
+          </TabsTrigger>
+        ))}
       </TabsList>
 
       {["overview", "database", "rebate", "contracts", "retailers"].map(

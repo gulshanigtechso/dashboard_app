@@ -3,10 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Zap } from "lucide-react";
 import { BarChart, Bar, ResponsiveContainer, Cell, XAxis } from "recharts";
+import type { DashboardData, PayoutData } from "@/types/dashboard";
 
-const PayoutChart = ({ data }) => {
+const PayoutChart = ({ data }: { data: DashboardData }) => {
   return (
-    <Card className="col-span-4 rounded-[28px] p-6 pb-4 border-none shadow-sm bg-white">
+    <Card className="col-span-1 md:col-span-4 rounded-[28px] p-6 pb-4 border-none shadow-sm bg-white flex flex-col">
       <div className="flex items-center justify-between mb-8">
         <Badge
           variant="secondary"
@@ -29,7 +30,7 @@ const PayoutChart = ({ data }) => {
         <span className="text-sm font-semibold text-gray-900 mb-2">$2.5 m</span>
       </div>
 
-      <div className="h-40 w-full">
+      <div className="h-56 w-full mt-auto">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data.payouts}
@@ -44,15 +45,15 @@ const PayoutChart = ({ data }) => {
               interval="preserveStartEnd"
             />
 
-            <Bar dataKey="value" barSize={22} radius={[12, 12, 12, 12]}>
-              {data.payouts.map((item, index) => (
+            <Bar dataKey="value" barSize={24} radius={[12, 12, 12, 12]}>
+              {data.payouts.map((_: PayoutData, index: number) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={
-                    index === data.payouts.length - 1
-                      ? "#CFFF4D"
-                      : index === data.payouts.length - 2
+                    index >= 3 && index <= 7
                       ? "#111111"
+                      : index === data.payouts.length - 1
+                      ? "#CFFF4D"
                       : "#E5E7EB"
                   }
                 />

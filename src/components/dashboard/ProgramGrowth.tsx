@@ -2,21 +2,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
-
-interface GrowthItem {
-  name: string;
-  partners: number;
-  progress: number;
-}
+import type { DashboardData, Partner } from "@/types/dashboard";
 
 interface GrowthListProps {
-  data?: GrowthItem[];
+  data?: Partner[];
 }
 
 const GrowthList = ({ data = [] }: GrowthListProps) => {
   return (
     <div className="space-y-5">
-      {data.map((item, i) => (
+      {data.map((item: Partner, i: number) => (
         <div key={i} className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-xs font-medium text-gray-900">
@@ -47,12 +42,12 @@ const GrowthList = ({ data = [] }: GrowthListProps) => {
   );
 };
 
-const ProgramGrowth = ({ data }) => {
+const ProgramGrowth = ({ data }: { data: DashboardData }) => {
   return (
     <Card className="border-none rounded-2xl">
       <CardContent className="p-6">
         <Tabs defaultValue="application">
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
             <div>
               <h3 className="text-sm font-semibold text-gray-900">
                 Program Growth
@@ -62,7 +57,7 @@ const ProgramGrowth = ({ data }) => {
               </p>
             </div>
 
-            <TabsList className="bg-gray-50 rounded-full p-1">
+            <TabsList className="bg-gray-50 rounded-full p-1 overflow-x-auto">
               {["application", "product", "campaign"].map((tab) => (
                 <TabsTrigger
                   key={tab}

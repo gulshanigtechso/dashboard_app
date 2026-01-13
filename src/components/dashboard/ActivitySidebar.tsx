@@ -5,9 +5,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import type { DashboardData, ActivityItem } from "@/types/dashboard";
 
 interface ActivitySidebarProps {
-  data: any;
+  data: DashboardData;
   isOpen: boolean;
   onToggle: () => void;
 }
@@ -16,8 +17,10 @@ const ActivitySidebar = ({ data, isOpen, onToggle }: ActivitySidebarProps) => {
   return (
     <aside
       className={cn(
-        "backdrop-blur-md bg-transparent border-2 border-white rounded-[34px] shadow-md h-full flex flex-col transition-[width] duration-500 ease-in-out",
-        isOpen ? "w-90 px-4" : "w-20 px-2"
+        "backdrop-blur-xl bg-white/30 border-2 border-white shadow-md flex flex-col transition-all duration-500 ease-in-out overflow-hidden",
+        "w-full h-dvh lg:h-auto",
+        "rounded-none lg:rounded-[34px]",
+        isOpen ? "px-4" : "px-2"
       )}
     >
       <div className="flex justify-center py-4">
@@ -39,7 +42,7 @@ const ActivitySidebar = ({ data, isOpen, onToggle }: ActivitySidebarProps) => {
         <div
           className={cn("space-y-3", !isOpen && "flex flex-col items-center")}
         >
-          {data.activity.map((item) => (
+          {data.activity.map((item: ActivityItem) => (
             <Card
               key={item.id}
               className={cn(

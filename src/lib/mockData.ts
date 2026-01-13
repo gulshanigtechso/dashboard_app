@@ -1,49 +1,16 @@
-export interface Metric {
-  label: string;
-  value: string;
-  subValue?: string;
-  trend?: "up" | "down" | "neutral";
-}
-
-export interface ApprovalItem {
-  id: string;
-  companyName: string;
-  action: string;
-  initials: string;
-  color: string;
-  timeAgo: string;
-}
-
-export interface PayoutData {
-  month: string;
-  value: number;
-}
-
-export interface FunnelData {
-  totalMarket: number;
-  prospects: number;
-  leads: number;
-  sales: number;
-  growth: number;
-}
-
-export interface Partner {
-  name: string;
-  partners: number;
-  progress: number;
-}
-
-export interface ActivityItem {
-  id: string;
-  user: string;
-  avatar: string;
-  message: string;
-  timeAgo: string;
-  isUnread?: boolean;
-  badge?: number;
-}
+import type {
+  Metric,
+  ApprovalItem,
+  PayoutData,
+  FunnelData,
+  Partner,
+  ActivityItem,
+} from "@/types/dashboard";
 
 export const MOCK_METRICS: Metric[] = [
+  { label: "Outreached", value: "1,240", subValue: "Partners Contacted", trend: "up" },
+  { label: "Onboarded", value: "85", subValue: "Active in Program", trend: "up" },
+  { label: "Awaiting", value: "12", subValue: "Pending Content", trend: "neutral" },
   { label: "Performance", value: "$334.4k" },
   { label: "Social", value: "24M Views" },
   { label: "Partners", value: "422 rebates" },

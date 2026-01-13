@@ -1,9 +1,21 @@
 import { CheckCircle, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import type { DashboardData } from "@/types/dashboard";
 
-const Metrics = ({ data }) => {
+const Metrics = ({ data }: { data: DashboardData }) => {
+  const getMetric = (label: string) =>
+    data.metrics.find((m) => m.label === label) || {
+      value: "0",
+      subValue: "",
+      trend: "neutral",
+    };
+
+  const outreached = getMetric("Outreached");
+  const onboarded = getMetric("Onboarded");
+  const awaiting = getMetric("Awaiting");
+
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card className="p-6 border-none shadow-sm">
         <div className="flex justify-between mb-8">
           <span className="text-[10px] uppercase font-bold text-gray-400">
@@ -15,9 +27,11 @@ const Metrics = ({ data }) => {
         </div>
         <div className="flex justify-between items-end">
           <div>
-            <div className="text-3xl font-medium text-gray-900">1,240</div>
+            <div className="text-3xl font-medium text-gray-900">
+              {outreached.value}
+            </div>
             <div className="text-[10px] text-gray-500 mt-1">
-              Partners Contacted
+              {outreached.subValue}
             </div>
           </div>
           <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">
@@ -35,9 +49,11 @@ const Metrics = ({ data }) => {
         </div>
         <div className="flex justify-between items-end">
           <div>
-            <div className="text-3xl font-medium text-gray-900">85</div>
+            <div className="text-3xl font-medium text-gray-900">
+              {onboarded.value}
+            </div>
             <div className="text-[10px] text-gray-500 mt-1">
-              Active in Program
+              {onboarded.subValue}
             </div>
           </div>
           <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">
@@ -55,9 +71,11 @@ const Metrics = ({ data }) => {
         </div>
         <div className="flex justify-between items-end">
           <div>
-            <div className="text-3xl font-medium text-gray-900">12</div>
+            <div className="text-3xl font-medium text-gray-900">
+              {awaiting.value}
+            </div>
             <div className="text-[10px] text-gray-500 mt-1">
-              Pending Content
+              {awaiting.subValue}
             </div>
           </div>
         </div>

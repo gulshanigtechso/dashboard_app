@@ -11,8 +11,12 @@ import { Menu } from "lucide-react";
 
 const BreadcrumbBar = () => {
   return (
-    <div className="flex items-center gap-3 px-6 py-3 border-b border-gray-100 text-xs text-gray-500">
-      <Button variant="ghost" size="icon" className="h-6 w-6 hover:text-black">
+    <div className="flex items-center gap-3 px-4 md:px-6 py-3 border-b border-gray-100 text-xs text-gray-500 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-6 w-6 hover:text-black shrink-0"
+      >
         <Menu className="h-4 w-4" />
       </Button>
 

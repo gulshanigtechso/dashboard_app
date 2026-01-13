@@ -2,35 +2,38 @@ import { AlertCircle, CheckCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import type { DashboardData, ApprovalItem } from "@/types/dashboard";
 
-const ApprovalQueue = ({ data }) => {
+const ApprovalQueue = ({ data }: { data: DashboardData }) => {
   return (
-    <div className="relative rounded-[28px] bg-[#FFFBEB] shadow-sm p-6 before:content-[''] before:absolute before:top-0 before:left-0 before:w-1.5 before:h-full before:bg-orange-300 overflow-hidden">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="h-9 w-9 rounded-full border border-amber-300 bg-amber-100 flex items-center justify-center text-amber-600">
-          <AlertCircle className="w-4 h-4" />
-        </div>
+    <div className="relative rounded-[28px] bg-[#FFFBEB] shadow-sm p-4 md:p-6 before:content-[''] before:absolute before:top-0 before:left-0 before:w-1.5 before:h-full before:bg-orange-300 overflow-hidden">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-full border border-amber-300 bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+            <AlertCircle className="w-4 h-4" />
+          </div>
 
-        <div>
-          <h3 className="font-semibold text-gray-900 leading-tight">
-            Needs Approval
-          </h3>
-          <p className="text-sm text-gray-500">
-            {data.approvals.length} requests pending your review
-          </p>
+          <div>
+            <h3 className="font-semibold text-gray-900 leading-tight">
+              Needs Approval
+            </h3>
+            <p className="text-sm text-gray-500">
+              {data.approvals.length} requests pending your review
+            </p>
+          </div>
         </div>
 
         <Button
           variant="outline"
           size="sm"
-          className="ml-auto rounded-full text-xs font-bold uppercase text-amber-600 border-amber-200 hover:bg-amber-50"
+          className="w-full sm:w-auto sm:ml-auto rounded-full text-xs font-bold uppercase text-amber-600 border-amber-200 hover:bg-amber-50"
         >
           Approve All
         </Button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
-        {data.approvals.map((item) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {data.approvals.map((item: ApprovalItem) => (
           <Card
             key={item.id}
             className="rounded-2xl border border-gray-100 shadow-sm p-4 hover:shadow-md transition"
@@ -45,10 +48,12 @@ const ApprovalQueue = ({ data }) => {
               <span className="text-[11px] text-gray-400">{item.timeAgo}</span>
             </div>
 
-            <h4 className="text-sm font-semibold text-gray-900">
+            <h4 className="text-sm font-semibold text-gray-900 truncate">
               {item.companyName}
             </h4>
-            <p className="text-xs text-gray-500 mb-4">{item.action}</p>
+            <p className="text-xs text-gray-500 mb-4 line-clamp-1">
+              {item.action}
+            </p>
 
             <Button
               variant="secondary"
