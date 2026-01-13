@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDashboard } from "@/hooks/useDashboard";
 import { cn } from "@/lib/utils";
-import Metrics from "./Metrics";
-import ApprovalQueue from "./ApprovalQueue";
-import PayoutChart from "./PayoutChart";
-import PartnerFunnel from "./PartnerFunnel";
-import ProgramGrowth from "./ProgramGrowth";
-import ActivitySidebar from "./ActivitySidebar";
-import KeyMetrics from "./KeyMetrics";
-import PartnersToolbar from "./PartnersToolbar";
-import PartnerTabs from "./PartnersTab";
-import ActivityTicker from "./ActivityTicker";
 import { MessageSquare } from "lucide-react";
+import ActivityTicker from "@/components/dashboard/ActivityTicker";
+import KeyMetrics from "@/components/dashboard/KeyMetrics";
+import PartnerTabs from "@/components/dashboard/PartnersTab";
+import PartnersToolbar from "@/components/dashboard/PartnersToolbar";
+import ApprovalQueue from "@/components/dashboard/ApprovalQueue";
+import PayoutChart from "@/components/dashboard/PayoutChart";
+import PartnerFunnel from "@/components/dashboard/PartnerFunnel";
+import Metrics from "@/components/dashboard/Metrics";
+import ProgramGrowth from "@/components/dashboard/ProgramGrowth";
+import ActivitySidebar from "@/components/dashboard/ActivitySidebar";
 
 export default function Dashboard() {
   const { data, isLoading, error } = useDashboard();
